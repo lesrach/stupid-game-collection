@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>day04</title>
+	<style type="text/css">
+	span{float: left;}
+</style>
+</head>
+<body>
+	<input id="money" value="10000"></input>
+	<input type="num" id="chip"></input>
+	<button id="gamble">人生赢家</button><br />
+	<span id="result"></span>
+	<span id="info"></span>
+	<span id="fly"></span>
+</body>
+	<script>
+		var moneyv=document.getElementById("money");
+		var chipv=document.getElementById("chip");
+		var gamblev=document.getElementById("gamble");
+		var resultv=document.getElementById("result");
+		var infov=document.getElementById("info");
+		var flyv=document.getElementById("fly");
+		var chipchip=0,flyy=0,nn=0,nnn=0,mm=0;
+
+		gamblev.onclick=function(){
+			outermost:
+			for (var i = 0; i <= 100; i++) {
+				var a=0,b=0,c=0,txt="";
+				chipchip=Number(chipv.value);
+				mm=Number(moneyv.value);
+				if(mm>=chipchip){
+					mm-=chipchip;
+				}else{
+					break outermost;
+				}
+				a=parseInt(Math.random()*10);
+				b=parseInt(Math.random()*10);
+				c=parseInt(Math.random()*10);
+				txt=a+"\t"+b+"\t"+c;
+				resultv.innerHTML+=txt;
+				if(a==b&&b==c){
+					resultv.innerHTML+="\t飞机！";
+					mm+=chipchip*40;
+					nn++;
+				} else if(a==b||b==c){
+					resultv.innerHTML+="\t对子！";
+					mm+=chipchip*2.1;
+					nnn++;
+				} else if(a==c){
+					resultv.innerHTML+="\t对子！";
+					mm+=chipchip*2.1;
+					nnn++;
+				}else{
+					resultv.innerHTML+="\t散打！";
+				}
+				resultv.innerHTML+="<br/>";
+				moneyv.value=mm;
+				
+			}	
+			if(mm<chipchip){
+				infov.innerHTML=" &nbsp; &nbsp;没钱赌个屁 loser&nbsp; &nbsp;";
+				infov.style.color="red";
+			}
+			if(nn>20){
+				flyv.innerHTML="打飞机"+nn+"次，"+"超越旭哥？";
+			}else if(nn>10){
+				flyv.innerHTML="打飞机"+nn+"次，"+"旭哥猛的一比";
+			}else if(nn>5){
+				flyv.innerHTML="打飞机"+nn+"次，"+"旭哥棒棒哦";
+			}else if(nn>3){
+				flyv.innerHTML="打飞机"+nn+"次，"+"有点点像旭哥了";
+			}else{
+				flyv.innerHTML="打飞机"+nn+"次，"+"追逐旭哥一样的男人";
+			}
+			
+			flyv.style.color="green";
+		}
+	</script>
+</html>

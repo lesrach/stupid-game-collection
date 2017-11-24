@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8" />
+	<style type="text/css">
+		#rest{display: none;}
+		h3{text-align: center;
+			font-size: 20px;
+			font-weight: 900;
+			color: green;}
+		#op{width: 100px;}
+	</style>
+</head>
+<body>
+	<!-- 第十五题 -->
+	<h3>阿姆斯特朗回旋加速式阿姆斯特朗猜大小</h3>
+	赌资：<a id="p1">10000</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;历史最高赌资:<a id="score"></a><br/>赌注：
+	<select id="stake">
+		<option id="opt1">100</option>
+		<option id="opt2">200</option>
+		<option id="opt3">500</option>
+		<option id="opt4">1000</option>
+		<option id="opt5">2000</option>
+		<option id="opt6">5000</option>
+	</select>
+	<select id="num">
+		<option>大</option>
+		<option>小</option>
+	</select><br/><br/>
+	<input type="button" id="btn" value="买定离手" />
+	<input type="number" id="op" min="0" max="100" step="5" placeholder="连抽几次" />
+	<p id="p2"></p>
+	<p id="p3"></p>
+	<br/>
+	<input id="rest" type="button" value="什么渣渣运气，再来一把" />
+	<hr/>
+</body>
+<script src="js/lianxi.js"></script>
+</html>

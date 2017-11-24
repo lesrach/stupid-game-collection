@@ -1,0 +1,197 @@
+
+//////////公用角色
+function Role(option){
+	option = option || {};
+	this.x = option.x;
+	this.y = option.y;
+	this.element = null;
+	this.map = null;
+	this.width = option.width;
+	this.height = option.height;
+	this.src = option.src;
+	this.speed = null;
+	this.sur = true;
+	this.timer = null;
+}
+
+Role.prototype.init = function(){
+	var ele = this.element =document.createElement("img");
+	ele.src = this.src;
+	css(ele,{
+		position: "absolute",
+		left: this.x,
+		top:this.y,
+		width:this.width+"px",
+		height:this.height+"px"
+	})
+	ele.map.element.appendChild(ele); 
+}
+Role.prototype.move = function(){
+	this.y += this.speed;
+	css(this,{
+		top:this.y+"px"
+	})
+	if(this.y<0 || this.y> this.map.height){
+		this.sur = false;
+		this.map.element.remove(this.element);
+	}
+}
+//////////////自己的战机
+function Self(option){
+	Role.call(this.option);
+	this.hp = 5;
+}
+Self.prototype = new Role();
+Self.prototype.constructor = Self;
+Self.prototype.move = function(){
+	var that = this;
+	this.map.onload = function(){
+		window.onkeydown = function(){
+			e = e || event;
+			var src = e.target || e.srcElement;
+			if(e.which == 37){
+				that.timer = setInterval(function(){
+					this.x -= 3;
+					if(this.x<0){
+						this.x = 0;
+						return;
+					}
+					css(this.element,{
+						width:this.x+"px"
+					})
+				},1000/60)
+			}
+			if(e.which == 38){
+				that.timer = setInterval(function(){
+					this.y -= 3;
+					if(this.y<0){
+						this.y = 0;
+						return;
+					}
+					css(this.element,{
+						width:this.x+"px"
+					})
+				},1000/60)
+			}
+			if(e.which == 39){
+				that.timer = setInterval(function(){
+					this.x += 3;
+					this.x = Math.min(this.x,this.map.width);
+					css(this.element,{
+						width:this.x+"px"
+					})
+				},1000/60)
+			}
+			if(e.which == 40){
+				that.timer = setInterval(function(){
+					this.y += 3;
+					this.y = Math.min(this.y,this.map.height);
+					css(this.element,{
+						width:this.x+"px"
+					})
+				},1000/60)
+			}
+		}
+		window.onkeydown = function(){
+			clearInterval(that.timer);
+		}
+	}
+}
+///////////敌对飞机构造
+function Enemy(option){
+	Role.call(this.option);
+	this.hp = 5;
+}
+Enemy.prototype = new Role();
+Enemy.prototype.constructor = Enemy;
+///////////子弹构造
+function Bullet(option){
+	Role.call(this.option);
+}
+Bullet.prototype = new Role();
+Bullet.prototype.constructor = Bullet;
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////   地图构造
+function Map(option){
+	option = option || {};
+	this.width = option.width || 320;
+	this.heigth = option.height || 568;
+	this.init_bg = option.init_bg;
+	this.bg = option.bg;
+	this.element = "";
+	this.self = null;
+}
+Map.prototype.init = function(){
+	var map = this.element = document.createElement("div");
+		css(map,{
+			width:this.width+"px",
+			height:this.height+"px",
+			margin:"auto",
+			position:"absolute",
+			left:0,
+			top:0,
+			right:0,
+			bottom:0,
+			background:"url("+ this.url +")"
+		})
+	$("body")[0].appendChild(map);
+	map.onclick = function(){
+		css(this,{
+			background:`url(${this.bg})`
+		})
+		var game = new Game(this);
+		game.init();
+	}
+}
+////////////    游戏构造函数
+function Game(map){
+	this.self = null;
+	this.enemies = [];
+	this.bullets = [];
+	this.score = 0;
+	this.map = map;
+}
+Game.prototype.init = function(){
+	console.log(this);
+	var self = new Self({
+		src:"img/self.gif",
+		left:(this.map.width-this.x)/2+"px",
+		top:"400px",
+		width:"66px",
+		height:"80px",
+	});
+	this.map.self = self;
+	self.map = map;
+	var	time = 0,
+		that = this;
+	this.timer = setInterval(function(){
+		time += 1;
+		if(time%30 == 0){
+			var enemy = this.element = new Enemy({
+				src:"img/small_fly.png",
+				width:"34px",
+				height:"24px",
+				left:Math.random()*300+"px",
+				top:0
+			})
+			that.map.element.appendChild(enemy);
+			that.enemies.push(enemy);
+		}
+		if(time%20 == 0){
+			var bullet = this.element = new Bullet({
+				src:"img/bullet.png",
+				width:"6px",
+				height:"14px",
+				left:(that.self.left+33)+"px",
+				top:that.self.top +"px"
+			})
+			that.map.element.appendChild(bullet);
+			that.bullets.push(bullet);
+		}
+		for(var i=0;i<enemise;i++){
+			this.enemies[i].move();
+		}
+		for(var i=0;i<enemise;i++){
+			this.bullets[i].move();
+		}
+	},1000/60)
+}

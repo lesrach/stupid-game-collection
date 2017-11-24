@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>数独模拟</title>
+		<style type="text/css">
+			#text{width: 950px; position: absolute; top:200px;left: 0;z-index: 1;}
+			#text>div{width:100px; height: 100px; display: inline-block; box-sizing: border-box; border: 1px solid; margin: 0; line-height:100px; word-wrap: break-word;text-align: center; background: transparent;}
+			#back{position: absolute; left: 0; top:200px; width: 940px;height: 950px; border: 0;}
+			#back>div{border: 3px solid; width: 300px; height: 300px; box-sizing: border-box; float: left;}
+		</style>
+	</head>
+		<button id="btn">高亮</button>
+		<button id="sure">打印</button><br />
+		<div id="text">
+			
+		</div>
+		<div id="back">
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+		</div>
+	<body>
+		<script src="../js/tools.js"></script>
+		<script type="text/javascript">
+			var count = new Array(90),
+				arrtext = "",
+				reg = /[0-9]+/;
+			for(let i=0;i<count.length;i++){
+				count[i] = [1,2,3,4,5,6,7,8,9];
+			}
+			
+			$("#btn").onclick = function(){
+				for(let i =0;i<count.length;i++){
+					if(count[i].length ==1 ){
+						$("div",$("#text"))[Math.floor(i/10)*9+i%10].style.color ="red";
+					}
+				}
+			}
+			
+			function check(a,b,c){
+				a = parseInt(a);
+				if(a && (b+1) && (c+1)){
+					count[b*10+c] = [a];
+					for(let i=0;i<9;i++){
+						if(i!=c){
+							remove(a,count[b*10+i]);
+							$("div",$("#text"))[b*9+i].innerHTML = count[b*10+i].join("");
+						}
+					}
+					for(let i=0;i<9;i++){
+						if(i!=b){
+							remove(a,count[i*10+c]);
+							$("div",$("#text"))[i*9+c].innerHTML = count[i*10+c].join("");
+						}
+					}
+					var arow = parseInt(b/3),
+						acol = parseInt(c/3);
+					for(let i=0;i<3;i++){
+						for(let j=0;j<3;j++){
+							if(((arow*3+i) * 10+ acol*3 + j) !=( b*10+c))
+							remove(a,count[(arow*3+i)*10+acol*3+j]);
+							$("div",$("#text"))[(arow*3+i)*9+acol*3+j].innerHTML = count[(arow*3+i) * 10+ acol*3 + j].join("");
+						}
+					}
+				}
+			}
+			
+			$("#sure").onclick = function(){
+				$("#text").innerHTML= "";
+				for(let i=0;i<9;i++){
+					for(let j=0;j<9;j++){
+						var ele = document.createElement("div");
+						ele.innerHTML = [1,2,3,4,5,6,7,8,9].join("");
+						ele.index = i*9+j;
+						$("#text").appendChild(ele);
+						ele.onclick = function(){
+							var numb = prompt("请输入数字:");
+							if(reg.test(numb) && (this.innerHTML.indexOf(numb) != -1)){
+								this.innerHTML = numb;
+								check(numb,parseInt(this.index/9),this.index%9);
+							}
+						}
+					}
+				}
+			}
+			
+			function remove(num,arr){
+				if(Array.isArray(arr)){
+						for(let i =0;i<arr.length;i++){
+						if(arr[i]==num && arr.length>1){
+							arr.splice(i,1);
+						}
+					}
+				}
+			}
+			
+			function reduce(arr){
+				if(arr.length ==1 || typeof arr != "object"){
+					return arr;
+	 			} else {
+	 				return arr.reduce(function(a,b){
+	 					return a+b;
+	 				},0)
+	 			}
+			}
+			
+			function run(){
+				for(let i=0;i<count.length;i++){
+					if(count[i].length == 1){
+						check(count[i],parseInt(i/10),i%10);
+					}
+				}
+			}
+			var timer = setInterval(run,1000);
+		</script>
+	</body>
+</html>

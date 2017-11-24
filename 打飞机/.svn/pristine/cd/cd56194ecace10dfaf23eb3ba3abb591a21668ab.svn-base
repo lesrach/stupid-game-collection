@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>fly</title>
+		<link rel="stylesheet" type="text/css" href="css/index.css"/>
+		<style type="text/css">
+			
+		</style>
+	</head>
+	<body>
+		<script src="js/tools.js"></script>
+		<script src="js/construct.js"></script>
+		
+		<script>
+			var map = new Map();
+			map.init();
+		</script>
+	</body>
+</html>

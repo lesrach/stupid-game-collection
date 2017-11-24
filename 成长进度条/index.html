@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>gameloft</title>
+	<style type="text/css">
+	*{margin: 0;padding: 0;color: #ececec;font-family: "微软雅黑";}
+	img{display: inline-block;border: 0;}
+	button{cursor: pointer;padding: 2px 8px;border: 0;outline: none;}
+	h1{color: orangered;text-align: center;}
+	span{float: left;}
+	/****上:通用重置;下：mainbox************/
+	h1#titleH1{background: url(img/BkB.jpg) repeat;width: 962px;font-family: "楷体";
+		background-size: 100% 100%;height: 100px;line-height: 100px;color: #444;font-size: 40px;
+		margin: 0 auto;margin-top: 66px;animation: titleBg 7s running infinite linear;
+		}
+	@keyframes titleBg{
+		0%{background-position: 0 0;color: #000;}
+		100%{background-position: 962px 0;color: #fff;}
+	}	
+	#mainbox{width: 920px;height:510px;border: solid 1px #000;overflow: hidden;
+		position: relative;padding: 20px;margin: 0 auto;box-shadow: 0 2px 2px black;
+		background: url(img/map.jpg) no-repeat;
+		background-size: cover;}
+	#wordBg{width: 100%;height: 100%;position: absolute;left: 0;top: 0;
+		background: rgba(200,200,200,.5) url(img/BkText.png) repeat;
+		background-size: 100% 100%;animation: titleBg 7s running infinite linear;}
+		span.author{position: absolute;right: 5px;bottom: 5px;font-size: 12px;}
+	#logoImg{position: absolute;left: 330px;top: 90px;width: 50px;display: none;}
+	#actor{width: 60px;font-size: 20px;font-weight: bold;padding-left: 30px;height: 22px;display: none;
+		text-align: center;background: url(img/UpAbleBt.png) no-repeat 0 -23px;}
+	#spanAbility{min-width: 280px;text-align: center;padding: 0 28px;display: none;
+		position: absolute;left: 20px;top: 56px;color: goldenrod;
+		background: url(img/BuffIcon.bmp) no-repeat 0 -116px;background-size: 23px;}
+	#start{background: #184808 url(img/frame1.png) no-repeat;background-size: 100% 100%;
+		border: double 2px black;
+		position: absolute;left: 0;top: 0;bottom: 0;right: 0;margin: auto;padding: 0;
+		box-shadow: 0 2px 3px black;font-size: 30px;box-sizing: border-box;width: 200px;height: 50px;}
+	#pause{background: url(img/frame2.png) no-repeat;background-size: 100% 100%;
+		position: absolute;left: 130px;top: 20px;display: none;color: #000;
+		padding: 5px 10px;}
+	#speed{background: url(img/frame3.png) no-repeat;background-size: 100% 100%;
+		position: absolute;left: 190px;top: 20px;display: none;
+		padding: 5px 10px;}
+	#save{position: absolute;right: 80px;top: 10px;display: none;color: black;
+		width: 60px;height: 30px;
+		background: url(img/BtLunHui.png) no-repeat;background-size: 60px 90px;}
+	#save:hover{background-position: 0 -30px;}
+	#quit{position: absolute;right: 10px;top: 10px;display: none;color: black;
+		width: 60px;height: 30px;
+		background: url(img/BtExit.png) no-repeat;background-size: 60px 90px;}
+	#quit:hover{background-position: 0 -30px;}
+	#spanEvent{width: 300px;height:380px;display: none;text-align: center;
+		line-height: 31px;position: absolute;left: 20px;top: 88px;font-size: 14px;
+		background: url(img/frame3.png) no-repeat;padding: 28px 0;overflow: hidden;
+		background-size: 100% 100%;
+	/*-webkit-border-image: url(img/frame4.png) 12 15 7 16/10px round;*/
+	}
+	h5#titleH5{color: gold;font-size: 16px;text-align: center;display: none;
+	position: absolute;left: 83px;top: 93px;z-index: 88;}
+	/***初始化界面***/
+	#initActor{width: 360px;height:233px;box-sizing: border-box;
+			background: url(img/frame4.png) no-repeat;background-size: 100% 100%;
+			position: absolute;left: 50%;margin-left: -180px;top: 122px;
+			padding: 40px;display: none;z-index: 99;}
+		#initActorTop{height: 20px;overflow: hidden;}
+			#initActor span:first-of-type{color: #000;height: 16px;font-size: 14px;}
+			#initNum{color: red;height: 16px;font-size: 16px;}
+			#initRand{background: url(img/frame1.png) no-repeat;background-size: 100% 100%;
+				color: deepskyblue;float: right;padding: 2px 10px;}	
+		#initActor p{width: 130px;font-weight: bold;float: left;margin-top: 20px;color: #000;}
+		#initActor p b{color: black;}
+		#initActor p:first-of-type{color: #000;}
+		#initActor p:nth-of-type(2){margin-left: 20px;}
+		#initActor p:nth-of-type(3){color: #000;}
+		#initActor p:nth-of-type(4){color: #000;margin-left: 20px;}
+		#initActor p button{width: 20px;height: 20px;border: 0;box-shadow: 1px 2px 3px darkgray;
+			float: right;padding: 0;font-size: 20px;line-height: 20px;}
+		#initActor p button.plus{background: darkred;}
+		#initActor p button.minus{background: darkgreen;}
+		#initActor div#initInfo{width: 100%;text-align: center;color: cornflowerblue;height: 13px;
+			display: none;margin-top: 0;font-size: 13px;position: absolute;left: 0;bottom: 70px;}
+		#initEnd{color: black;font-size: 30px;font-weight: 600;width: 85px;
+			position: absolute;left: 50%;margin-left: -40px;bottom: 15px;padding: 2px 10px;
+			background: url(img/frame1.png) no-repeat;background-size: 100% 100%;}
+		#initQuit{position: absolute;right: 10px;bottom: 15px;color: red;background: none;
+			border: 0;outline: none;}
+	/***对战界面***/
+	#fightBox{width: 610px;height: 195px;position: absolute;right: 20px;top: 333px;
+		display: none;padding: 4px 20px;background: url(img/frame1.png) no-repeat;
+		box-sizing: border-box;
+		background-size: 100% 100%;}
+		#fightBox h4{text-align: center;color: gold;font-size: 23px;}
+		#monsterName{color: deepskyblue;font-size: 15px;font-weight: bold;}
+		#fightBox img#fightImg{position: absolute;left: 275px;top: 70px;
+			animation: imgJump .5s running infinite;}	
+		@keyframes imgJump{
+			0%  {transform: translateY(0);}		
+			25% {transform: translateY(5px);}
+			50% {transform: translateY(0);}
+			75% {transform: translateY(-5px);}
+			100%{transform: translateY(0);}
+		}
+		#monsterName{float: right;margin: 10px 10px 0 0;padding-left: 25px;
+			background: url(img/BossFlag.png) no-repeat;background-size: contain;}
+		#monsterSS{float: right;line-height: 27px;font-size: 12px;
+			margin: 7px 65px 0 0;}
+		#actorStatus{position: absolute;left: 100px;top: 65px;text-align: center;}
+		#monsterStatus{position: absolute;right: 90px;top: 65px;text-align: center;}
+		#fightResult{position: absolute;left: 200px;bottom: 17px;display: block;
+			text-align: center;width: 220px;}
+	/***经验界面***/
+	#expBox{width: 576px;height: 108px;position: absolute;right: 20px;top: 86px;
+		background: url(img/Frame5.png) no-repeat;background-size: 100% 100%;
+		display: none;}
+		#expBox span{float: left;}
+		#expAch,#expSpan,#expTitle{position: absolute;bottom: 7px;color: black;font-size: 13px;}
+		#expAch{left: 35px;}
+		#expSpan{right: 150px;}
+		#expTitle{left: 207px;}
+		#expName1,#expNum1,#expNum1Per{margin-left: 35px;margin-top: 6px;}
+		#expName2,#expName3,#expName4,#expName5,#expNum2,#expNum3,#expNum4,#expNum5,#expNum2Per,#expNum3Per,#expNum4Per,#expNum5Per{
+			margin-left: 65px;margin-top: 6px;}
+		#expName1,#expNum1,#expNum1Per{color: black;}
+		#expName2,#expNum2,#expNum2Per{color: green;}
+		#expName3,#expNum3,#expNum3Per{color: orangered;}
+		#expName4,#expNum4,#expNum4Per{color: purple;}
+		#expName5,#expNum5,#expNum5Per{color: goldenrod;}
+		#expNum1,#expNum2,#expNum3,#expNum4,#expNum5,#expNum1Per,#expNum2Per,#expNum3Per,#expNum4Per,#expNum5Per{
+			width: 46px;text-align: center;
+		}
+		#expB,#expBB,#expBBB{font-size: bold;}
+</style>
+</head>
+<body>
+	<h1 id="titleH1">成长进度条</h1>
+	<!--主界面，其他界面在此基础上绝对定位-->
+	<div id="mainbox">
+		<span class="author">v1.0 By HiTler</span>
+		<div id="wordBg"><span class="author">v1.0 By HiTler</span></div>
+		<img id="logoImg" src="img/actor.png"/>
+		<button id="start">新时代</button>
+		<span id="actor">小霸王</span>
+		<span id="spanAbility">力量：
+			<b id="strength" class="fourAtt"></b>&nbsp;&nbsp;灵活：
+			<b id="wisdom" class="fourAtt"></b>&nbsp;&nbsp;技巧：
+			<b id="charm" class="fourAtt"></b>&nbsp;&nbsp;运气：
+			<b id="luck" class="fourAtt"></b>
+		</span>
+		<h5 id="titleH5">——潜伏爪牙忍受——</h5>
+		<span id="spanEvent"></span>
+		<button id="pause">暂停</button>
+		<button id="speed">加速</button>
+		<button id="save"></button>
+		<button id="quit"></button>
+		<!--初始属性界面-->
+		<div id="initActor">
+			<div id="initActorTop">
+				<button id="initRand">随一波属性</button>
+				<span>可分配的属性点：</span>
+				<span id="initNum">10</span>
+			</div>
+			<p>力量：<b id="initStrength"></b>
+				<button class="plus" id="plusStrength">+</button>
+				<button class="minus" id="minusStrength">-</button>
+			</p>
+			<p>灵活：<b id="initWisdom"></b>
+				<button class="plus" id="plusWisdom">+</button>
+				<button class="minus" id="minusWisdom">-</button>
+			</p>
+			<p>技巧：<b id="initCharm"></b>
+				<button class="plus" id="plusCharm">+</button>
+				<button class="minus" id="minusCharm">-</button>
+			</p>
+			<p>运气：<b id="initLuck"></b>
+				<button class="plus" id="plusLuck">+</button>
+				<button class="minus" id="minusLuck">-</button>
+			</p>
+			<div id="initInfo">过头啦，不满意就重新随一波</div>
+			<button id="initEnd">走起</button>
+			<button id="initQuit">还没准备好？</button>
+		</div>
+		<!--经验系统-->
+		<div id="expBox">
+			<span id="expSpan">经验：<b id="expB"></b></span>
+			<span id="expAch">成就：<b id="expBB"></b></span>
+			<span id="expTitle">称号：<b id="expBBB"></b></span>
+			<span id="expName1"></span>
+			<span id="expName2"></span>
+			<span id="expName3"></span>
+			<span id="expName4"></span>
+			<span id="expName5"></span>
+			<span id="expNum1">0</span>
+			<span id="expNum2">0</span>
+			<span id="expNum3">0</span>			
+			<span id="expNum4">0</span>		
+			<span id="expNum5">0</span>
+			<span id="expNum1Per">0</span>
+			<span id="expNum2Per">0</span>
+			<span id="expNum3Per">0</span>			
+			<span id="expNum4Per">0</span>		
+			<span id="expNum5Per">0</span>
+		</div>
+		<!--对战界面-->
+		<div id="fightBox">
+			<img id="fightImg" src="img/FightFlag.png"/>
+			<h4>——恰如猛虎卧荒丘——</h4>
+			<span id="monsterSS"></span>
+			<span id="monsterName"></span>
+			<span id="actorStatus"></span>
+			<span id="monsterStatus"></span>
+			<span id="fightResult"></span>
+		</div>
+	</div>
+	
+</body>
+<script>
+		//dom
+		var _start=document.getElementById("start"),
+			_pause=document.getElementById("pause"),
+			_initQuit=document.getElementById("initQuit"),
+			_quit=document.getElementById("quit"),
+			_save=document.getElementById("save"),
+			_speed=document.getElementById("speed"),
+			_fourAtt=document.getElementsByClassName("fourAtt"),
+			_monsterName=document.getElementById("monsterName");
+		//系统设置相关变量
+		var intervalN=1000; //1000ms
+		var fighting=0;		//战斗状态中标志
+		
+		var heroStyle=new Array();	//为主角引入称号系统，弥补属性上的差距.
+			heroStyle=["白丁","撸铁狂战士","大圣下凡","浪客剑心","鹿鼎公"];	
+				//0->初始状态,1->力量型,2->灵活,3->技巧,4->运气
+		var fightRadio=[1,1,1,1];	//根据上面的style和主角成就，四维系数战斗时会加成
+		var achList=new Array();	//成就系统
+		achList=["打不死的小强","菜鸟",　"老鸟",　"登堂入室",　"圆转纯熟",　"初窥堂奥",　"略有小成",　
+		"渐入佳境"　,"炉火纯青"　,"自成一派",　"已臻大成",　"登峰造极",　"出神入化", "游戏至尊" ,"游戏之神"];
+		//属性初始化--主角,属性名
+		var ability=new Array();
+		ability=["力量","灵活","技巧","运气"];
+		//主角属性值数组
+		var actorAbility=new Array();
+		//事件初始化
+		var eventList=new Array();
+		eventList=["流连网吧LOL","电影院包场看电影","踢足球太猛了","路边捡到个萌妹纸!","买了n多彩票","守着电脑看片儿","请高手剪了个头",
+		"绕二绕跑了10圈","捡的妹子走了","和兄弟侃了一整天","酒吧看球通宵","路边卖艺,这就是生活!","瞎扯到自己都扯不下去了"];
+		//怪兽
+		var monsters="",monsterKind=new Array(),monsterAdj1=new Array(),
+			monsterAdj2=new Array(),monsterAtt=new Array(),
+			monsterAdj1=["平凡的","不俗的","罕见的","古老的","史诗的","传说的","混沌的"],
+			monsterAdj2=["打酱油的","成精的","嗜血","暴躁","临界的","进化体","究极体"],
+			monsterKind=["旋龟","伏羲","貔貅","帝鸿","狴犴","鲲鹏","刑天"],
+			monsterAtt=["力量:","灵活:","技巧:","运气:"],
+			monsterAMP=0,		//怪兽能力振幅
+			monsterAbility=new Array(),
+			monsterGrade=0,			//取0~4，当作monsterGradeName的下标
+			//怪兽分级，3~21，分为：21-终极boss，18~20-大boss，14~17-boss，11~13-精英怪，3~10-酱油怪
+			monsterGradeName=["酱油怪","精英怪","boss","大boss","幕后老板"];
+		//初始化显示怪物等级名
+		expName5.innerHTML=monsterGradeName[4];
+		expName4.innerHTML=monsterGradeName[3];
+		expName3.innerHTML=monsterGradeName[2];
+		expName2.innerHTML=monsterGradeName[1];
+		expName1.innerHTML=monsterGradeName[0];	
+			
+		//经验系统	
+		var killNum=[0,0,0,0,0],	//杀怪计数，0~4号元素对应上面的怪兽分级
+			generatorNum=[0,0,0,0,0],	//生成的各种怪的总数
+			killPer=[0,0,0,0,0],		//成功率
+			expSum=0,					//总经验值
+			actorTitle="白丁",			//主角四维倾向，系数加成
+			actorScale=0.2;				//主角称号加成系数
+			actorScaleAU=0.0001;		//主角菜鸡时累加基础系数
+		
+		//概率数组
+		var proArr1=new Array(),proArr2=new Array();
+		proArr1=[5,5,15,20,35,18,0.00001];
+		//随机0~n,取不到n
+		function randomE(n){
+			return parseInt(n*Math.random());
+		}
+		//随机a~b
+		function randomTwo(a,b){
+			return a+parseInt((b-a+1)*Math.random());
+		}
+		//数组求和,数组、数组前n项
+		function sumArr(arr,x){
+			var sum=0;
+			for(i=0;i<x;i++){
+				sum+=Number(arr[i]);
+			}
+			return sum;
+		}
+		//概率(随机数范围定死100，概率数组选择)
+		function probCal(arr){
+			var n,ss;
+			ss=100*Math.random();
+			for(n=arr.length;n>=1;n--){
+				if(n==1&&ss<=sumArr(arr,n)){
+					return 0;
+				}
+				if(ss>sumArr(arr,n)) {
+					return n-1;
+				}
+			}
+		}
+		
+		//触发事件及影响属性
+		function abilityEvent(a,e){
+			if(spanEvent.innerHTML.length>238){
+				spanEvent.innerHTML="";
+			}
+			var txt=actor.innerHTML+eventList[e]+ability[a];
+			spanEvent.innerHTML+=txt;
+			
+			var x=1+randomE(5),y=randomE(100);
+			if (y<45) {
+				x=-x;
+				txt="下降了"+x;
+			}else{
+				txt="上升了"+x;
+			}
+			spanEvent.innerHTML=spanEvent.innerHTML+txt+"<br/>";
+			for(i=0;i<=a;i++){
+				if(a==i){
+					if(x<0&&Number(_fourAtt[i].innerHTML)<Math.abs(x)){
+					_fourAtt[i].innerHTML=0;
+					_fourAtt[i].style.color="green";
+					}else{
+						_fourAtt[i].innerHTML=Number(_fourAtt[i].innerHTML)+x;
+						if(y<45){
+							_fourAtt[i].style.color="green";
+						}else{
+							_fourAtt[i].style.color="red";
+						}
+					}
+				}
+			}		
+		}
+		
+		//指定内容增加
+		function attPlus(c,n){
+			c.innerHTML=Number(c.innerHTML)+n;
+		}
+		//产生小怪兽，概率类泊松
+		//3个类目对总值加强度的影响
+		//4个属性怎么分
+		//将原战斗系统中的一部分属性初始化放在这里
+		//怪兽分级记录
+		function monsterGenerator(){
+			if(Number(_fourAtt[0].innerHTML)!==0){
+				//先获取主角4维,方便以后计算
+				for(aA=0;aA<=3;aA++){
+					actorAbility[aA]=Number(_fourAtt[aA].innerHTML);
+				}
+				monsterSS.innerHTML="";
+				//var a=randomE(monsterAdj1.length),b=randomE(monsterAdj2.length),c=randomE(monsterKind.length);
+				//起名，2前缀+1种类直接影响加强度
+				var a=probCal(proArr1),b=probCal(proArr1),c=probCal(proArr1);
+				monsters=monsterAdj1[a]+monsterAdj2[b]+monsterKind[c];
+				_monsterName.innerHTML=monsters;
+				//加强度
+				var sum=a+b+c+3;	//最小阶数为1，不是0，每项补1，就是后增加的monsterGrade概念
+				//怪兽分级，3~21，分为：21-终极boss，17~20-大boss，12~16-boss，7~11-精英怪，3~7-酱油怪
+				if(sum>=21){
+					monsterGrade=4;
+				}else if(sum>=17){
+					monsterGrade=3;
+				}else if(sum>=12){
+					monsterGrade=2;
+				}else if(sum>=7){
+					monsterGrade=1;
+				}else if(sum>=3){
+					monsterGrade=0;
+				}
+				generatorNum[monsterGrade]++;
+				monsterAMP=sum*0.06-0.13;		//总能力阶梯,最弱的振幅设为5%，最强为2.13倍
+				if(sum==21){
+					monsterAMP=3;				//幕后boss直接3倍
+				}
+				//生成四维，四维总=主角四维总*加强度，慢慢试
+				var sumA=Number(actorAbility[0])+Number(actorAbility[1])+Number(actorAbility[2])+Number(actorAbility[3]);
+				var sumM=(1+monsterAMP)*sumA;
+				sumA=0;		//完成上面的使命，下面用作记录放大/缩小倍数,然后再进行成比例还原
+				for(dd=0;dd<=3;dd++){
+					var randomAAA=randomTwo(10,40)/100;
+					sumA+=randomAAA;
+					monsterAbility[dd]=randomAAA*sumM;	
+				}
+				for(cc=0;cc<=3;cc++){
+					monsterAbility[cc]=Math.round(monsterAbility[cc]/sumA);
+					monsterSS.innerHTML+=(ability[cc]+":&nbsp;"+monsterAbility[cc]+"&nbsp;");
+				}
+				//主角称号判断，影响战斗能力系数
+				if((actorAbility[0]==Math.max(actorAbility[0],actorAbility[1],actorAbility[2],actorAbility[3]))&&(actorAbility[0]>(1.1*Math.max(actorAbility[1],actorAbility[2],actorAbility[3])))){
+					expBBB.innerHTML=heroStyle[1];
+					expBBB.style.color="red";
+				}else if((actorAbility[1]==Math.max(actorAbility[0],actorAbility[1],actorAbility[2],actorAbility[3]))&&(actorAbility[1]>(1.1*Math.max(actorAbility[0],actorAbility[2],actorAbility[3])))){
+					expBBB.innerHTML=heroStyle[2];
+					expBBB.style.color="green";
+				}else if((actorAbility[2]==Math.max(actorAbility[0],actorAbility[1],actorAbility[2],actorAbility[3]))&&(actorAbility[2]>(1.1*Math.max(actorAbility[0],actorAbility[1],actorAbility[3])))){
+					expBBB.innerHTML=heroStyle[3];
+					expBBB.style.color="blue";
+				}else if((actorAbility[3]==Math.max(actorAbility[0],actorAbility[1],actorAbility[2],actorAbility[3]))&&(actorAbility[3]>(1.1*Math.max(actorAbility[0],actorAbility[2],actorAbility[1])))){
+					expBBB.innerHTML=heroStyle[4];
+					expBBB.style.color="gold";
+				}else{
+					expBBB.innerHTML=heroStyle[0];
+					expBBB.style.color="black";
+				}
+				var indexF=achList.indexOf(expBB.innerHTML);
+				if(expBBB.innerHTML==heroStyle[1]){
+					fightRadio[0]+=actorScale*(indexF+2);
+				}else if(expBBB.innerHTML==heroStyle[2]){
+					fightRadio[1]+=actorScale*(indexF+2);
+				}else if(expBBB.innerHTML==heroStyle[2]){
+					fightRadio[2]+=actorScale*(indexF+2);
+				}else if(expBBB.innerHTML==heroStyle[2]){
+					fightRadio[3]+=actorScale*(indexF+2);
+				}else{
+					fightRadio[0]+=0.5*actorScale*(indexF+2);
+					fightRadio[1]+=0.5*actorScale*(indexF+2);
+					fightRadio[2]+=0.5*actorScale*(indexF+2);
+					fightRadio[3]+=0.5*actorScale*(indexF+2);
+				}
+				
+				//传入参数还要调,战斗过程显示在控制台	
+				//console.log("******************************************************************************************")
+				//console.log("开始战斗：");
+				fightAgainst[0]=faCal(actorAbility,0.8,fightRadio[0],fightRadio[1]);
+				fightAgainst[1]=faCal(monsterAbility,0.8,1,1);
+				//console.log("主角抗打：\t"+fightAgainst[0]+"\t\t\t\t\t\t\tVs"+"\t\t\t怪物抗打：\t"+fightAgainst[1]);
+				attackValue[0]=avCal(actorAbility,0.4,fightRadio[0],fightRadio[1],fightRadio[2]);
+				attackValue[1]=avCal(monsterAbility,0.4,1,1,1);
+				//console.log("主角攻击：\t"+attackValue[0]+"\t\t\t\t\t\t\tVs"+"\t\t\t怪物攻击：\t"+attackValue[1]);
+				avoidHurt[0]=ahCal(actorAbility,0.7,fightRadio[1],fightRadio[2],fightRadio[3]);
+				avoidHurt[1]=ahCal(monsterAbility,0.7,1,1,1);
+				//console.log("主角免伤：\t"+avoidHurt[0]+"\t\t\t\t\t\t\tVs"+"\t\t\t怪物免伤：\t"+avoidHurt[1]);
+				trickSpeed[0]=tvCal(actorAbility,0.1,fightRadio[2]);
+				trickSpeed[1]=tvCal(monsterAbility,0.1,1);
+				//console.log("主角集气速度："+tvCal(actorAbility,0.1,1)+"\t\t\t\t\t\t\tVs"+"\t\t\t怪物集气速度："+tvCal(monsterAbility,0.1,1));
+				
+				if(generatorNum[4]!=0) expNum5Per.innerHTML=(100*killNum[4]/generatorNum[4]).toFixed(2)+"%";
+				if(generatorNum[3]!=0) expNum4Per.innerHTML=(100*killNum[3]/generatorNum[3]).toFixed(2)+"%";
+				if(generatorNum[2]!=0) expNum3Per.innerHTML=(100*killNum[2]/generatorNum[2]).toFixed(2)+"%";
+				if(generatorNum[1]!=0) expNum2Per.innerHTML=(100*killNum[1]/generatorNum[1]).toFixed(2)+"%";
+				if(generatorNum[0]!=0) expNum1Per.innerHTML=(100*killNum[0]/generatorNum[0]).toFixed(2)+"%";
+				
+				//系数还原，避免一直累加
+				if(expBBB.innerHTML==heroStyle[1]){
+					fightRadio[0]-=0.2*(indexF+2);
+				}else if(expBBB.innerHTML==heroStyle[2]){
+					fightRadio[1]-=0.2*(indexF+2);
+				}else if(expBBB.innerHTML==heroStyle[2]){
+					fightRadio[2]-=0.2*(indexF+2);
+				}else if(expBBB.innerHTML==heroStyle[2]){
+					fightRadio[3]-=0.2*(indexF+2);
+				}else{
+					fightRadio[0]-=0.1*(indexF+2);
+					fightRadio[1]-=0.1*(indexF+2);
+					fightRadio[2]-=0.1*(indexF+2);
+					fightRadio[3]-=0.1*(indexF+2);
+				}
+				actorStatus.innerHTML="";
+				monsterStatus.innerHTML="";
+				fightResult.innerHTML="战斗中..";
+				fightResult.style.color="white";
+				fighting=1;		//生成怪物后就进战斗
+			}
+			
+		}
+		var attackSide=false,	//攻击方,0是玩家攻击
+				trickValue=new Array(),	//集气值
+				trickSpeed=new Array(),	//集气速度，跟技巧有关，100后暴击2倍伤害
+				fightAgainst=new Array(),  //抗击打,0是主角,1是怪物
+				attackValue=new Array(),	//攻击力
+				avoidHurt=new Array();	//免伤比
+				
+		//战斗系统。四个属性的含义，过程，怎么判胜
+		//actorAbility 与 monsterAbility 的比拼
+		//注意互斥，进入战斗后，主循环不再生成新怪物
+		//1，抗击打（等效于生命）与力量和灵活正相关，力量（身体）为主，灵活（闪避）辅助增强抗击打--减为0就输了
+		function faCal(arr,n,a,b){	//待计算数组,系数(需至少大于0.6,力量才是主),成就或称号加成ab对应力量/灵活
+			var sumfa=0;
+			sumfa=Math.round(arr[0]*n*a+arr[1]*(1-n)*b);	
+			return sumfa;
+		}
+		//2，攻击力与力量/灵活/技巧正相关，攻防两方的运气差值影响命中率，灵活差值辅助影响命中
+		function avCal(arr,n,a,b,c){	//和上面差不多,多个c影响技巧相关称号加成
+			var sumav=0;			//技巧的比重比灵活高
+			sumav=Math.round(arr[0]*n*a+(arr[1]*(1-n)*b/3)+arr[2]*(1-n)*c*2/3); 
+			return sumav;
+		}
+		//3，技巧高的集气快，会心一击，2？倍伤害且短暂提高运气2混合   -----来个动画
+		function tvCal(arr,n,c){
+			var tvSpeed=0;
+			tvSpeed=Math.round(arr[2]*n*c);
+			return tvSpeed;				//求的是速度,集气值在后面的循环累加,满100就触发
+		}
+		//4，免伤比公式（伤害=攻击*（1-免伤比））  --免伤比又灵活,技巧,运气决定。
+		//或除法公式（伤害=攻击*攻击/（攻击+防御）） ---用这个，防御=免伤比
+		//免除伤害比计算：
+		function ahCal(arr,n,b,c,d){
+			var sumah=0;
+			sumah=Math.round(arr[3]*n*d+(arr[1]*(1-n)*b/2)+arr[2]*(1-n)*c/2);
+			return sumah;
+		}
+		
+		//战斗系统
+		function fightSys(){		//不在主循环里调用,另外设置一个时钟
+			if(actorAbility[3]<monsterAbility[3]) attackSide=true;
+			//给个循环,处理没回合pk,战况实时更新,集气值充能,抗击打力降低--使用延时，方便显示过程
+				fightProcess();	
+			//判断经验，改成就	。  新手有积累系数加成。  称号的加成是不累加的
+			expB.innerHTML=expSum;
+			expB.style.color="deepskyblue";
+			if(expSum<=0){
+				expBB.innerHTML=achList[0];
+				expBB.style.color="red";
+				fightRadio[0]+=actorScaleAU;
+				fightRadio[1]+=actorScaleAU;
+				fightRadio[2]+=actorScaleAU;
+				fightRadio[3]+=actorScaleAU;
+			}else if(expSum<=10){
+				expBB.innerHTML=achList[1];
+				expBB.style.color="black";
+				fightRadio[0]+=actorScaleAU;
+				fightRadio[1]+=actorScaleAU;
+				fightRadio[2]+=actorScaleAU;
+				fightRadio[3]+=actorScaleAU;
+			}else if(expSum<=50){
+				expBB.innerHTML=achList[2];
+				fightRadio[0]+=actorScaleAU;
+				fightRadio[1]+=actorScaleAU;
+				fightRadio[2]+=actorScaleAU;
+				fightRadio[3]+=actorScaleAU;
+			}else if(expSum<=100){
+				expBB.innerHTML=achList[3];
+				expBB.style.color="purple";
+			}else if(expSum<=300){
+				expBB.innerHTML=achList[4];
+				expBB.style.color="green";
+			}else if(expSum<=800){
+				expBB.innerHTML=achList[5];
+				expBB.style.color="orange";
+			}else if(expSum<=2000){
+				expBB.innerHTML=achList[6];
+				expBB.style.color="red";
+			}else if(expSum<=5000){
+				expBB.innerHTML=achList[7];
+				expBB.style.color="blue";
+			}else if(expSum<=10000){
+				expBB.innerHTML=achList[8];
+				expBB.style.color="deepskyblue";
+			}else if(expSum<=20000){
+				expBB.innerHTML=achList[9];
+				expBB.style.color="orange";
+			}else if(expSum<=50000){
+				expBB.innerHTML=achList[10];
+				expBB.style.color="green";
+			}else if(expSum<=100000){
+				expBB.innerHTML=achList[11];
+				expBB.style.color="purple";
+			}else if(expSum<=200000){
+				expBB.innerHTML=achList[12];
+				expBB.style.color="blue";
+			}else if(expSum<=500000){
+				expBB.innerHTML=achList[13];
+				expBB.style.color="deepskyblue";
+			}else if(expSum<=1000000){
+				expBB.innerHTML=achList[14];
+				expBB.style.color="goldenrod";
+			}
+		///////////////////////////////////////////
+			fighting=0;		//战斗完后方可生成新的小怪
+		}
+		//战斗过程
+		function fightProcess(){
+			var hurtCurrent=0;
+			do{
+				if(attackSide===false){
+					if(trickValue[0]>=100){	//暴击， 1.5~2.5倍
+						hurtCurrent=(1.5+Math.random())*Math.round(attackValue[0]*attackValue[0]/(avoidHurt[1]*2));
+						trickValue[0]=0;
+					}else{				//普通攻击	 0.5~1.2倍，70%概率在1倍以下
+						hurtCurrent=(0.5+0.7*Math.random())*Math.round(attackValue[0]*attackValue[0]/(avoidHurt[1]*2));
+					}
+					fightAgainst[1]-=Math.round(hurtCurrent);
+					trickValue[0]+=trickSpeed[0];
+					//console.log("怪物受到伤害："+hurtCurrent);
+				}else{
+					if(trickValue[1]>=100){
+						hurtCurrent=(1.5+Math.random())*Math.round(attackValue[1]*attackValue[1]/(avoidHurt[0]*2));
+						trickValue[1]=0;
+					}else{
+						hurtCurrent=(0.5+Math.random())*Math.round(attackValue[1]*attackValue[1]/(avoidHurt[0]*2));
+					}
+					fightAgainst[0]-=Math.round(hurtCurrent);
+					trickValue[1]+=trickSpeed[1];
+					//console.log("主角受到伤害："+hurtCurrent);
+				}
+				attackSide=!attackSide;
+				actorStatus.innerHTML="主角生命："+"<br>"+fightAgainst[0];
+				monsterStatus.innerHTML=monsterGradeName[monsterGrade]+"生命："+"<br>"+fightAgainst[1];
+			}while(Number(fightAgainst[0])>0&&Number(fightAgainst[1])>0);	
+			
+			if(Number(fightAgainst[0])>0&&Number(fightAgainst[1])<=0){
+				fightResult.innerHTML="大侠你赢了！";
+				fightResult.style.color="gold";
+				//console.log("大侠你赢了！\n\n");
+				killNum[monsterGrade]++;
+				expNum1.innerHTML=killNum[0];
+				expNum2.innerHTML=killNum[1];
+				expNum3.innerHTML=killNum[2];
+				expNum4.innerHTML=killNum[3];
+				expNum5.innerHTML=killNum[4];
+				expSum+=(monsterGrade+1);			
+			}else{
+				fightResult.innerHTML="菜鸟练过再来！";
+				fightResult.style.color="green";
+				//console.log("菜鸟练过再来！\n\n");
+				expSum-=1;
+			}
+		}
+		
+		
+		//经验系统
+		function expPlus(){
+			
+		}
+		//主线程
+		function mainThread(){			
+			if(fighting==0){
+				//生成怪物
+				monsterGenerator();
+				//随机事件影响属性
+				abilityEvent(randomE(4),randomE(eventList.length));
+			}else{
+				//战斗过程
+				fightSys();
+			}
+			
+		}
+//------------------------------------------------------------------------------------------	
+//-----------------------------------------------------------------------------------------------------
+		//系统开转,各种点击事件
+		var timerSystem,timerFight;
+		//开始游戏，显示初始化属性块
+		_start.onclick=function(){
+			initActor.style.display="block";
+			_start.style.display="none";
+		}
+		//退出游戏
+		var quitBool;
+		_quit.onclick=function(){		//confirm返回true/false
+			quitBool=confirm("确认已存档？");
+			if(quitBool===true){
+				clearInterval(timerSystem);
+        
+				_start.style.display="block";
+				_start.disabled=false;
+				_pause.style.display="none";
+				spanEvent.innerHTML="";
+				strength.innerHTML="";
+				wisdom.innerHTML="";
+				charm.innerHTML="";
+				luck.innerHTML="";
+				fightBox.style.display="none";
+				expBox.style.display="none";
+				_pause.innerHTML="暂停";
+				_pause.style.backgroundColor="red";
+				_speed.style.display="none";
+				logoImg.style.display="none";
+				spanEvent.style.display="none";
+				_quit.style.display="none";
+				_save.style.display="none";
+				spanAbility.style.display="none";
+				titleH5.style.display="none";
+				actor.style.display="none";
+				wordBg.style.display="block";
+			}else{
+				
+			}
+		}
+		//存档游戏
+		_save.onclick=function(){
+			alert("学了再来");
+		}
+		//初始化四维
+		//全局存一下，方便下面的减法按钮判断
+		var initStrengthX,initWisdomX,initCharmX,initLuckX;
+		initRand.onclick=function(){
+			var arr=new Array(),sum;
+			do{
+				sum=0;
+				for(i=0;i<4;i++){
+					arr[i]=randomE(40)+10;
+					sum+=arr[i];
+				}
+			}while(sum>150&&sum<140);
+			initStrength.innerHTML=arr[0];
+			initWisdom.innerHTML=arr[1];
+			initCharm.innerHTML=arr[2];
+			initLuck.innerHTML=arr[3];
+			initNum.innerHTML=10;
+			initLuckX=arr[3];
+			initCharmX=arr[2];
+			initWisdomX=arr[1];
+			initStrengthX=arr[0];
+		}
+		//初始化属性完毕，开搞
+		initEnd.onclick=function(){
+			_start.disabled=true;
+			var a=randomE(4),b=randomE(6);	//主循环，事件产生器
+			
+			timerSystem=setInterval("mainThread()",intervalN);
+     		mainThread();
+			_pause.style.display="block";
+			initActor.style.display="none";
+			strength.innerHTML=initStrength.innerHTML;
+			wisdom.innerHTML=initWisdom.innerHTML;
+			charm.innerHTML=initCharm.innerHTML;
+			luck.innerHTML=initLuck.innerHTML;
+			_quit.style.display="block";
+			_save.style.display="block";
+			fightBox.style.display="block";
+			expBox.style.display="block";
+			_speed.style.display="block";
+			spanEvent.style.display="block";
+			spanAbility.style.display="block";
+			titleH5.style.display="block";
+			actor.style.display="block";
+			wordBg.style.display="none";
+			logoImg.style.display="block";
+		}
+		//退出初始化属性界面，开始按钮再次出现
+		_initQuit.onclick=function(){
+			initActor.style.display="none";
+			_start.style.display="block";
+		}
+		//初始化属性界面的按钮加减，8个按钮
+		plusStrength.onclick=function(){
+			if(Number(initNum.innerHTML)>0){
+				attPlus(initStrength,1);
+				initNum.innerHTML=Number(initNum.innerHTML)-1;
+				initInfo.style.display="none";
+			}else{
+				initInfo.style.display="block";
+			}
+		}
+		plusWisdom.onclick=function(){
+			if(Number(initNum.innerHTML)>0){
+				attPlus(initWisdom,1);
+				initNum.innerHTML=Number(initNum.innerHTML)-1;
+				initInfo.style.display="none";
+			}else{
+				initInfo.style.display="block";
+			}
+		}
+		plusCharm.onclick=function(){
+			if(Number(initNum.innerHTML)>0){
+				attPlus(initCharm,1);
+				initNum.innerHTML=Number(initNum.innerHTML)-1;
+				initInfo.style.display="none";
+			}else{
+				initInfo.style.display="block";
+			}
+		}
+		plusLuck.onclick=function(){
+			if(Number(initNum.innerHTML)>0){
+				attPlus(initLuck,1);
+				initNum.innerHTML=Number(initNum.innerHTML)-1;
+				initInfo.style.display="none";
+			}else{
+				initInfo.style.display="block";
+			}
+		}
+		minusStrength.onclick=function(){
+			if(Number(initNum.innerHTML)==10){
+				initInfo.style.display="block";
+			}else{
+				if(initStrength.innerHTML==initStrengthX){
+					initInfo.style.display="block";
+				}else{
+					attPlus(initStrength,-1);
+					initNum.innerHTML=Number(initNum.innerHTML)+1;
+					initInfo.style.display="none";
+				}
+			}
+		}
+		minusWisdom.onclick=function(){
+			if(Number(initNum.innerHTML)==10){
+				initInfo.style.display="block";
+			}else{
+				if(initWisdom.innerHTML==initWisdomX){
+					initInfo.style.display="block";
+				}else{
+					attPlus(initWisdom,-1);
+					initNum.innerHTML=Number(initNum.innerHTML)+1;
+					initInfo.style.display="none";
+				}
+			}
+		}
+		minusCharm.onclick=function(){
+			if(Number(initNum.innerHTML)==10){
+				initInfo.style.display="block";
+			}else{
+				if(initCharm.innerHTML==initCharmX){
+					initInfo.style.display="block";
+				}else{
+					attPlus(initCharm,-1);
+					initNum.innerHTML=Number(initNum.innerHTML)+1;
+					initInfo.style.display="none";
+				}
+			}
+		}
+		minusLuck.onclick=function(){
+			if(Number(initNum.innerHTML)==10){
+				initInfo.style.display="block";
+			}else{
+				if(initLuck.innerHTML==initLuckX){
+					initInfo.style.display="block";
+				}else{
+					attPlus(initLuck,-1);
+					initNum.innerHTML=Number(initNum.innerHTML)+1;
+					initInfo.style.display="none";
+				}
+			}
+		}
+		//暂停、继续
+		var pauseTimes=0;
+		_pause.onclick=function(){
+			pauseTimes++;
+			if(pauseTimes%2==1){
+				_pause.innerHTML="继续";
+				_pause.style.backgroundColor="seagreen";
+				clearInterval(timerSystem);
+				fightImg.style.animationPlayState="pause";
+				//此处是没解决的bug，只能这种本办法
+				_quit.disabled=true;
+			}else{
+				_pause.innerHTML="暂停";
+				_pause.style.backgroundColor="red";
+				clearInterval(timerSystem);
+				timerSystem=setInterval("mainThread()",intervalN);
+				fightImg.style.animationPlayState="running";
+				//此处是没解决的bug，只能这种本办法
+				_quit.disabled=false;
+			}
+			if(pauseTimes==50000){
+				pauseTimes=0;
+			}
+		}
+		//加速
+		var intervalD=1;
+		_speed.onclick=function(){
+			intervalN/=Math.pow(2,intervalD);
+			if(intervalN>0.00000001){
+				_speed.innerHTML="";
+				_speed.innerHTML=Math.pow(2,intervalD)+"X速度";
+				intervalD++;     //用完intervalD再++
+				clearInterval(timerSystem);
+        			
+				timerSystem=setInterval("mainThread()",intervalN);
+     			
+			}else{
+				intervalD=0;
+				intervalN=1000;
+				_speed.innerHTML="最高速，再点初始化速度";
+				clearInterval(timerSystem);
+        			
+				timerSystem=setInterval("mainThread()",0.00000001);
+				
+			}	
+			_pause.innerHTML="暂停";
+			_pause.style.backgroundColor="red";
+			if(pauseTimes%2==1){
+				pauseTimes++;
+			}
+			_quit.disabled=false;
+			
+		}
+	</script>
+</html>

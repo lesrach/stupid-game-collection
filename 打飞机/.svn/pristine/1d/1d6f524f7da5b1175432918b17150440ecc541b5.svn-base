@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>fly</title>
+		<link rel="stylesheet" type="text/css" href="css/index.css"/>
+		<style type="text/css">
+			#box{position: absolute; left: 0;right: 0;top: 0;bottom: 0;margin: auto; width: 320px;height: 568px;overflow: hidden;}
+			.p{width: 20px;height: 20px;background:red; color:gold; line-height: 20px; text-align: center;font-size: 20px;}
+		</style>
+	</head>
+	<body>
+		<div id="box"></div>
+		<script src="js/tools.js"></script>
+		<script src="js/construct.js"></script>
+		<script src="js/map.js"></script>
+		<script src="js/game.js"></script>
+		<script>
+			var map = new Map({
+				bg:"img/bg.png",
+				init_bg:"img/start_bg.png"
+			});
+			map.init();
+			
+		</script>
+	</body>
+</html>
