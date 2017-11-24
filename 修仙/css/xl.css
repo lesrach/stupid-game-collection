@@ -1,0 +1,87 @@
+html,body{width:100%; height: 100%; overflow: hidden;	background: linear-gradient(to bottom,skyblue 0%, #fff 80%,green 100%); color: #ff0;}
+body{background: url(../img/bgmap3.jpg) repeat-x ; background-size: 200% 100%; animation: bgrun 20s linear infinite alternate;}
+@keyframes bgrun{
+	from{background-position-x: 0;}
+	to{background-position-x: -1000px;}
+}
+/*创建人物*/
+#newbackground{position: fixed;width: 100%; height: 100%; background: rgba(255,255,255,0.8); z-index: 9;}
+#createnew{ top: 20px; position: absolute;}
+#load{position: absolute; top:50px;}
+
+#create{width: 100%; height: 100%; background: rgba(255,255,255,0.6); position: fixed; z-index: 10; display: none;}
+	#block-c{width:400px; height: 240px; position: absolute; left: 0; right: 0; top:0; bottom: 0; margin: auto; background: linear-gradient(to right, #ddd, #aaa);padding: 10px;}
+		#block-c h2{height: 40px; text-align: center; font-size: 30px; border-bottom: 1px solid #000; }
+		#block-c b{width: 100px; display: inline-block;}
+		#block-c i{width: 250px; display: inline-block;}
+		#sure,#esc{width: 60px; height: 60px; border-radius: 50%; margin: 10px 65px;}
+/*右上角区块：地图*/
+
+#map{width:50%; height:450px; box-sizing:border-box; border:1px solid blue; float: right; position: relative;}
+	#mapc{position: absolute; left: 0; width: 100px; overflow-x:hidden;border-right: 1px solid #000; height: 100%; background:linear-gradient(to bottom, #fff, #dd7700); color: silver; text-align: center; z-index: 8;}
+		#mapc button{width: 80px; height: 20px;  text-align: center;}
+	#mapcon,#newva{width: 100%; height: 100%; padding-left: 100px; box-sizing: border-box; position: absolute; left: 0; right:0; }
+	#mapcon{display: none;}
+	
+		#mcon-head{width: 100%; height: 50px; border-bottom: 2px solid silver;}
+			#map-name{width: 160px; line-height: 50px; font-size: 30px; font-weight: bold; color: #000; float: left;padding: 0 10px;}
+			#mcon-head button{margin:5px 14px; height: 40px; width: 90px; text-align: center; float: left;}
+		#map-event{width: 100%;height: 300px;padding:30px 10px; box-sizing: border-box;}
+			#map-events{width: 100%; height: 100%;font-size: 12px; line-height: 24px; overflow-x: hidden;}
+		.border{width: 100%; height: 5px; background: linear-gradient(to right,#fff,#ff0,#f0f,#0ff,#f00,#0f0,#00f,#000);}
+	#mapfoot{width: 100%;}
+	#body-equip{width: 130px; float: left;}
+		#body-equip b{width:60px; line-height:14px; display:inline-block;height:14px;  float: left; margin: 2px 0 ;}
+		#hp,#mp{border-left: 1px solid red;}
+		#body-equip #hpnow,#body-equip #hp{color: red; text-align: center; width: 30px;}
+		#body-equip #mpnow,#body-equip #mp{color: blue; text-align: center; width: 30px;}
+		#atk,#def,#speed{color: gold;}
+	#mon-equip{width: 130px;  float: right;}
+		#mon-equip #mon-name{width: 120px;}
+		#mon-equip b{width:60px; line-height:14px; display:inline-block;height:14px;  float: left; margin: 2px 0 ;}
+		#mon-hp,#mon-mp{border-left: 1px solid #ab0104;}
+		#mon-equip #mon-hpnow,#mon-equip #mon-hp{color: red; text-align: center; width: 30px;}
+		
+		#newva{}
+			#newvaNpcBox{margin: 20px 0;}
+				#newva button{width: 80px; text-align: center; margin: 4px 20px;}
+			#newvaTextBox{border-top:1px solid #000; color: mediumblue;}
+				#newva #newvaTextBox button{width: 50px; margin: 0 4px;}
+				#newvaTextBox h3{width: 150px; font-size: 24px; line-height: 30px ; height: 30px ; display: inline-block; text-align: center;}
+				#textbox1{padding: 20px; color: #00FF00; font-size: 20px;}
+/*左上角区块：人物*/	
+#save{position: absolute;top:20px; left: 0;}	
+#head{width: 50%; height: 450px; box-sizing: border-box; border: 1px solid gold;padding: 10px; display: flex; }
+	#head .headimg{height: 100%;  width: 180px; border:0;  background: url(../img/charector.png) no-repeat; display: block; float: left; animation:headrun 0.5s  infinite step-end; padding-top: 300px; box-sizing: border-box; }
+	@keyframes headrun{
+		0%{background-position-x:0px}
+		16%{background-position-x:-180px}
+		33%{background-position-x:-360px}
+		50%{background-position-x:-540px}
+		66%{background-position-x:-720px}
+		83%{background-position-x:-900px}
+		100%{background-position-x:-1080px}
+	}
+		#head  b{color: #df7700;}
+		#head  i{float: left; line-height: 34px; margin-right: 10px;}
+		#head .head-line{height: 34px; border-bottom: 1px solid gold; float: left; position: relative;}
+		#head #head-property #xiulian{line-height: 100px; font-size: 40px; width: 100px; height: 100px; background: skyblue; border-radius: 50%; float: left; margin: 20px; text-align: center; color: gold ; outline: none; margin: 10px; }
+		
+		#head #head-property{flex:1; }
+		#head #head-property .head-line{width: 100%;}
+		#head .head-line b{float: left; line-height: 34px; }
+		#head #head-property button{display: block; float: right; margin-top: 5px;}
+		#exp{width: 90px; display: block; padding-left:20px;}
+	#head #head-equip{flex:1; padding-left:10px; }
+		#head-equip i{width: 40px; line-height: 24px; display: block; height: 24px; margin: 0; float: left;}
+		#head-equip b{width: 160px; line-height: 24px; display: block; height: 24px;  overflow: auto; margin: 0;  float: left; color:darkblue;}
+/* 左下角道具栏 */
+#item{width:50%; height:410px;  padding: 20px; box-sizing: border-box;}
+	#choose button{display: block; float: left; border: 1px solid #333;  width: 80px ; height: 30px; line-height: 30px; text-align: center; outline: none;}
+	#choose button:active{background:radial-gradient(#ccc,#aaa); }
+	#itembox {width: 100%; height: 360px; margin-top: 10px; position: relative;}
+	#itembox button{width: 80px; height: 30px;}
+		#items-equip,#items-elixir,#items-book{position: absolute; left:0; top:0; z-index: 1;width: 600px; height: 300px;  background: linear-gradient(to bottom,#ddd,#fff,#ddd);}
+		#items-equip{z-index: 2;}
+		#itembox h2{text-align: center;color:#ed7700;}
+			#equipbox{width: 500px; height: 200px; border: 1px solid #ff0000; padding: 20px; overflow-x:hidden ; color:darkblue; }

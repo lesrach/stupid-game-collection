@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+	<link rel="stylesheet" type="text/css" href="css/xl.css"/>
+	<title>XL</title>
+</head>
+<body>
+	<button id="stop" style="position: fixed; top:20px; display: none;">停止获取经验</button>
+	<button id="expup" style="display: none; position: absolute; top:0; left: 20px;">加速X2</button>
+	<div id="newbackground">
+		<button id="createnew" autofocus>创建一个新的人物</button>
+		<button id="load" disabled>读取存档</button>
+	</div>
+	
+	<!--创建人物模块-->
+	<div id="create">
+		<div id="block-c">
+			
+				<h2>创建人物</h2>
+				<b>请输入你的名字：</b><input type="text" id="inputname" required />
+				<button id="randompro">随机属性</button>
+				<b>力量</b><i id="c1">0</i>
+				<b>体质</b><i id="c2">0</i>
+				<b>悟性</b><i id="c3">0</i>
+				<b>身法</b><i id="c4">0</i>
+				<b>福缘</b><i id="c5">0</i>
+				<input type="submit" id="sure" value="确定">
+				<button id="esc">退出</button>
+			
+		</div>
+	</div>
+	<!-- 右上角地图事件框  -->
+	<div id="map">
+		<div id="mapc">
+			<button id="map_0" >稻香村</button>
+			<button id="map_1" >十里坡</button>
+			<button id="map_2" >盘石镇</button>
+			<button id="map_3" >飞马集</button>
+			<button id="map_4" ></button>
+			<button id="map_5" ></button>
+			<button id="map_6" ></button>
+			<button id="map_7" ></button>
+			<button id="map_8" ></button>
+			<button id="map_9" ></button>
+			<button id="map_10" ></button>
+			<button id="map_11" ></button>
+			<button id="map_12" ></button>
+			<button id="map_13" ></button>
+			<button id="map_14" style="color:green">皇宫</button>
+			<button id="map_15" style="color:green">赌场</button>
+			<button id="map_16" style="color:green">酒楼</button>
+			<button id="map_17" style="color:green">青楼</button>
+			<button id="map_18" style="color:green">黑市</button>
+			<button id="map_19" style="color:green">百晓生</button>
+			<button id="map_20" style="color:green">紫衣楼</button>
+			
+		</div>
+		<div id="mapcon" class="map">
+			<div id="mcon-head">
+				<h2 id="map-name">无</h2>
+				<button id="start">开始探险</button>
+				<button id="boss" disabled>挑战关卡BOSS</button>
+				<button id="backtostart">返回新手村</button>
+				<button style="display: none; margin-right: 0;">一键100次</button>
+			</div>
+			<div id="map-event">
+				<p id="map-events">
+					
+				</p>
+			</div>
+			<div class="border">
+				
+			</div>
+			<div id="mapfoot" class="clearfix">
+				<div id="body-equip">
+					<b >气血:</b><b id="hpnow"></b><b id="hp"></b>
+					<b >内力:</b><b id="mpnow"></b><b id="mp"></b>
+					<b >攻击力:</b><b id="atk"></b>
+					<b >防御力:</b><b id="def"></b>
+					<b >速度:</b><b id="speed"></b>
+				</div>
+				<div id="mon-equip">
+					<b id="mon-name">无</b>
+					<b >气血:</b><b id="mon-hpnow"></b><b id="mon-hp"></b>
+					<b >攻击力:</b><b id="mon-atk"></b>
+					<b >防御力:</b><b id="mon-def"></b>
+					<b >速度:</b><b id="mon-speed"></b>
+				</div>
+			</div>
+		</div>
+		<div id="newva" class="map">
+			<h2>稻香村</h2>
+			<div id="newvaNpcBox">
+				<button id="vanpc1">村长</button>
+				<button id="vanpc2">村长老婆</button>
+				<button id="vanpc3">胡先生</button>
+				<button id="vanpc4">牛大夫</button>
+				<button id="vanpc5">杜小二</button>
+				<button id="vanpc6">朱铁匠</button>
+				<button id="vanpc7">王寡妇</button>
+				<button id="vanpc8">谢大胆</button>
+				<button id="vanpc9">武教头</button>
+				<button id="vanpc10">韦朕</button>
+			</div>
+			<div id="newvaTextBox">
+				<div class="texthead">
+					<h3 id="newvaNpcName"></h3>
+					<button id="talk" class="npcbutton">交谈</button>
+					<button id="task" class="npcbutton">任务</button>
+					<button	id="change" class="npcbutton">交易</button>
+					<button id="cure" class="npcbutton">治疗</button>
+				</div>
+				<p id="textbox1">
+					
+				</p>
+			</div>
+		</div>
+	</div>
+	<!--  左上角属性框   -->
+	<div id="head">
+		<button id="save" >存档</button>
+		<div class="headimg">
+			姓名：<b id="name"></b><br />
+			等级：<b id="lv"> 0 </b><br />
+			境界：<b id="xiuwei"> 无 </b><br />
+			称谓：<b id="headtell"></b><br />
+			年龄：<b id="age"></b><br />
+			侠义： <b id="goodorevil"> 0 </b>
+		</div>
+		<div id="head-property">
+			<div class="head-line clearfix">
+				<i>经验值</i><b id="exp"></b>
+				<button id="lvup">升级</button>
+				
+			</div>
+			<div class="head-line clearfix">
+				<i>力量</i><b id="str">10</b>
+				<button id="addpro1">+</button>
+			</div>
+			<div class="head-line clearfix">
+				<i>体质</i><b id="phy">10</b>
+				<button id="addpro2">+</button>
+			</div>
+			<div class="head-line clearfix">
+				<i>悟性</i><b id="headstr">10</b>
+				<button id="addpro3">+</button>
+			</div>
+			<div class="head-line clearfix">
+				<i>身法</i><b id="foot">10</b>
+				<button id="addpro4">+</button>
+			</div>
+			<div class="head-line clearfix">
+				<i>福缘</i><b id="luck">10</b>
+				<button id="addpro5">+</button>
+			</div>
+			<div class="head-line clearfix">
+				<i>剩余属性点</i><b id="propoint">0</b>
+			</div>
+			<button id="xiulian">
+				修炼
+			</button>
+			<b id="xling" style="line-height:100px; "></b>
+			<div class="head-line clearfix">
+				<i>真气</i><b id="zhenqi">0</b>
+				<button id="zhenqiup">突破</button>
+			</div>
+			<div class="head-line clearfix">
+				<i>内功</i>
+				<b id="neigong">吐纳法</b>
+				<b style="color:pink; padding-left:5px;">内功系数：</b>
+				<b id="ng-coe">1</b>
+			</div>
+		</div>
+		<div id="head-equip">
+			<i>头部</i><b id="eqphead">草帽（1防御 ）</b>
+			<i>面具</i><b id="eqpface"></b>
+			<i>项链</i><b id="eqpdiamond"></b>
+			<i>衣服</i><b id="eqpbody">蓑衣（3防御 10血量）</b>
+			<i>手镯</i><b id="eqpbracelet"></b>
+			<i>主武器</i><b id="eqphandleft">桃木剑（20攻击）</b>
+			<i>副武器</i><b id="eqphandright">板砖（5攻击）</b>
+			<i>戒指</i><b id="eqpheadring1"></b>
+			<i>戒指</i><b id="eqpheadring2"></b>
+			<i>裤子</i><b id="eqppants">麻裤（2防御 5血量）</b>
+			<i>鞋</i><b id="eqpshooe">草鞋 （1防御 5速度）</b>
+			<i style="color:gold">铜钱</i><b id="money" style="color:#ED7D2B"></b>
+		</div>
+	</div>
+	<div id="item">
+		<div id="choose" class="clearfix">
+			<button id = "equip">装备</button>
+			<button id = "elixir">丹药</button>
+			<button id = "book">书籍/功法</button>
+			<button id = "diamond" disabled>宝石</button>
+			<button id = "pet" disabled>宠物</button>
+		</div>
+		<div id="itembox">
+			<div id="items-equip" class="item">
+				<h2>装备</h2>
+				<button id="equipboxall">全选/取消</button>
+				<button id="equipboxsell">出售</button>
+				<button id="equipboxadd">装备</button>
+				<div id="equipbox"></div>
+			</div>
+			<div id="items-elixir" class="item">
+				<h2>丹药</h2>
+				<button id="elixirboxall">全选</button>
+				<div id="elixirbox"></div>
+			</div>
+			<div id="items-book" class="item">
+				<h2>功法</h2>
+				<button id="bookboxall">全选</button>
+				<div id="bookbox"></div>
+			</div>
+		</div>
+	</div>
+	<script src="js/tools.js"></script>
+	<script src="js/xlevent.js"></script>
+	<script src="js/xlfunc.js"></script>
+</body>
+</html>
